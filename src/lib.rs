@@ -1,15 +1,61 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::near_bindgen;
+use near_sdk::serde::*;
+use near_sdk::env;
+use num_traits::cast::ToPrimitive;
 
 #[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize)]
-pub struct Contract {
+#[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
+#[serde(crate="near_sdk::serde")]
+pub struct Buses {
     // SETUP CONTRACT STATE
+    registration_no : String,
+    route : String,
+    bus_capacity : i8,
+    booked_seat: bool,
 }
 
 #[near_bindgen]
+#[derive(Default, BorshDeserialize, BorshSerialize)]
+pub struct Contract{
+    buz : Vec<Buses>,
+}
+
+#[near_bindgen]
+// #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
+    fn new_bus() -> Self{
+        let buz = Vec::new();
+        Contract{
+            buz
+        }
+    }
+    pub fn bus_count(&mut self) -> usize{
+        self.buz.len()
+    }
+    pub fn add_bus(&mut self, registration_no: String,
+        route: String,
+        bus_capacity: i8,
+        booked_seat: bool){
+            let buz1 = Buses{
+                registration_no: registration_no.to_string(),
+                route: route.to_string(),
+                bus_capacity: bus_capacity.to_i8(),
+                booked_seat: booked_seat.to_bool(),
+            };
+            self.buz.push(buz1);
+            env::log_str("Bus added");
+        }
+
+    pub fn show_bus(&mut self) -> &Vec<Buses>{
+        &self.buz
+    }
+    pub fn delete_bus(&mut self){
+        self.buz.pop();
+        env::log_str("Bus deleted");
+    }
+
 }
 
 /*
