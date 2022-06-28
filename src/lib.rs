@@ -1,8 +1,7 @@
-use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::near_bindgen;
-use near_sdk::serde::*;
-use near_sdk::env;
+use near_sdk::*;
 use num_traits::cast::ToPrimitive;
+use windows::*;
+
 
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
@@ -42,7 +41,7 @@ impl Contract {
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
                 bus_capacity: bus_capacity.to_i8(),
-                booked_seat: booked_seat.to_bool(),
+                booked_seat: booked_seat.as_bool(),
             };
             self.buz.push(buz1);
             env::log_str("Bus added");
