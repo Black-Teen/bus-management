@@ -1,6 +1,8 @@
-use near_sdk::*;
-use num_traits::cast::ToPrimitive;
-use windows::*;
+use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
+use near_sdk::near_bindgen;
+use near_sdk::serde::*;
+use near_sdk::env;
+// use num_traits::cast::ToPrimitive;
 
 
 #[near_bindgen]
@@ -10,8 +12,8 @@ pub struct Buses {
     // SETUP CONTRACT STATE
     registration_no : String,
     route : String,
-    bus_capacity : i8,
-    booked_seat: bool,
+    // bus_capacity : i8,
+    booked_seat: String,
 }
 
 #[near_bindgen]
@@ -24,7 +26,7 @@ pub struct Contract{
 // #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
-    fn new_bus() -> Self{
+    pub fn new_bus() -> Self{
         let buz = Vec::new();
         Contract{
             buz
@@ -35,13 +37,13 @@ impl Contract {
     }
     pub fn add_bus(&mut self, registration_no: String,
         route: String,
-        bus_capacity: i8,
-        booked_seat: bool){
+        // bus_capacity: i8,
+        booked_seat: String){
             let buz1 = Buses{
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
-                bus_capacity: bus_capacity.to_i8(),
-                booked_seat: booked_seat.as_bool(),
+                // bus_capacity: bus_capacity.to_i8(),
+                booked_seat: booked_seat.to_string(),
             };
             self.buz.push(buz1);
             env::log_str("Bus added");
