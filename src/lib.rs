@@ -82,4 +82,49 @@ mod tests {
     }
 
     // TESTS HERE
+    #[test]
+    fn bus_existence(){
+        let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
+        let _context = get_context(user.clone());
+        let mut buz = Contract::new_bus();
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "Active".to_string());
+        let counting = buz.bus_count();
+        assert_eq!(counting, 1);
+    }
+    #[test]
+    fn add_bus(){
+        let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
+        let _context = get_context(user.clone());
+
+        let mut buz = Contract::new_bus();
+        
+        buz.add_bus("KCA 452Z".to_string(), "Mombasa-Nairobi".to_string(), "Booked".to_string());
+        buz.add_bus("KDH 789D".to_string(), "Kisumu-Siaya".to_string(), "Active".to_string());
+        buz.add_bus("KBB 012A".to_string(), "Nakuru-Nairobi".to_string(), "Active".to_string());
+        let counts = buz.bus_count();
+        assert_eq!(counts, 3);
+    }
+
+    // Test for getting data from vector
+    #[test]
+    fn get_bus(){
+        let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
+        let _context = get_context(user.clone());
+        let mut buz = Contract::new_bus();
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "Active".to_string());
+        let counts = buz.show_bus();
+        assert_eq!(counts.len(), 1);
+    }
+
+    // test for the delete of job from vector
+    #[test]
+    fn delete_bus(){
+        let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
+        let _context = get_context(user.clone());
+        let mut buz = Contract::new_bus();
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "Active".to_string());
+        buz.delete_bus();
+        let counts = buz.show_bus();
+        assert_eq!(counts.len(), 0);
+    }
 }
