@@ -70,8 +70,8 @@ impl Contract {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use near_sdk::test_utils::{get_logs, VMContextBuilder};
-    use near_sdk::{testing_env, AccountId};
+    use near_sdk::test_utils::{VMContextBuilder};
+    use near_sdk::{AccountId};
 
     // part of writing unit tests is setting up a mock context
     // provide a `predecessor` here, it'll modify the default context
