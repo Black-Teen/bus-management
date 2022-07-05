@@ -16,6 +16,7 @@ pub struct Buses {
     bus_status: String,
 }
 
+
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Contract{
@@ -58,10 +59,7 @@ impl Contract {
         self.buz.pop();
         env::log_str("Bus deleted");
     }
-    pub fn booking(&mut self){
-        
-    }
-
+    
 }
 
 
