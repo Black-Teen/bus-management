@@ -2,7 +2,6 @@ use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::near_bindgen;
 use near_sdk::serde::*;
 use near_sdk::env;
-// use num_traits::cast::ToPrimitive;
 
 
 #[near_bindgen]
@@ -12,8 +11,8 @@ pub struct Buses {
     // SETUP CONTRACT STATE
     registration_no : String,
     route : String,
-    bus_capacity : String,
-    // all_seats : vec![1,..bus_capacity],
+    bus_capacity : i8,
+    all_seats : Vec<i8>,
     booked_seat: String,
 }
 
@@ -38,14 +37,14 @@ impl Contract {
     }
     pub fn add_bus(&mut self, registration_no: String,
         route: String,
-        bus_capacity: String,
-        // all_seats: vec![1,..bus_capacity],
+        bus_capacity: i8,
+        all_seats: Vec<i8>,
         booked_seat: String){
             let buz1 = Buses{
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
-                bus_capacity: bus_capacity.to_string(),
-                // all_seats: all_seats.try_to_vec(),
+                bus_capacity: bus_capacity,
+                all_seats: all_seats,
                 booked_seat: booked_seat.to_string(),
             };
             self.buz.push(buz1);
@@ -90,7 +89,7 @@ mod tests {
         let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
         let _context = get_context(user.clone());
         let mut buz = Contract::new_bus();
-        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "62".to_string(),  "Active".to_string());
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), 62, (1..62).collect::<Vec<i8>>(),  "Active".to_string());
         let counting = buz.bus_count();
         assert_eq!(counting, 1);
     }
@@ -101,9 +100,9 @@ mod tests {
 
         let mut buz = Contract::new_bus();
         
-        buz.add_bus("KCA 452Z".to_string(), "Mombasa-Nairobi".to_string(), "62".to_string(),  "Booked".to_string());
-        buz.add_bus("KDH 789D".to_string(), "Kisumu-Siaya".to_string(), "30".to_string(),  "Active".to_string());
-        buz.add_bus("KBB 012A".to_string(), "Nakuru-Nairobi".to_string(), "20".to_string(),  "Active".to_string());
+        buz.add_bus("KCA 452Z".to_string(), "Mombasa-Nairobi".to_string(), 62, (1..62).collect::<Vec<i8>>(), "Booked".to_string());
+        buz.add_bus("KDH 789D".to_string(), "Kisumu-Siaya".to_string(), 30,  (1..30).collect::<Vec<i8>>(), "Active".to_string());
+        buz.add_bus("KBB 012A".to_string(), "Nakuru-Nairobi".to_string(), 20,  (1..20).collect::<Vec<i8>>(), "Active".to_string());
         let counts = buz.bus_count();
         assert_eq!(counts, 3);
     }
@@ -114,7 +113,7 @@ mod tests {
         let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
         let _context = get_context(user.clone());
         let mut buz = Contract::new_bus();
-        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "62".to_string(),  "Active".to_string());
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), 62,  (1..62).collect::<Vec<i8>>(), "Active".to_string());
         let counts = buz.show_bus();
         assert_eq!(counts.len(), 1);
     }
@@ -125,7 +124,7 @@ mod tests {
         let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
         let _context = get_context(user.clone());
         let mut buz = Contract::new_bus();
-        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), "62".to_string(),  "Active".to_string());
+        buz.add_bus("KBB 012A".to_string(), "Mombasa-Nairobi".to_string(), 62,  (1..62).collect::<Vec<i8>>(), "Active".to_string());
         buz.delete_bus();
         let counts = buz.show_bus();
         assert_eq!(counts.len(), 0);
