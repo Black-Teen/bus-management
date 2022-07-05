@@ -13,7 +13,7 @@ pub struct Buses {
     route : String,
     bus_capacity : i8,
     all_seats : Vec<i8>,
-    booked_seat: String,
+    bus_status: String,
 }
 
 #[near_bindgen]
@@ -45,7 +45,7 @@ impl Contract {
                 route: route.to_string(),
                 bus_capacity: bus_capacity,
                 all_seats: all_seats,
-                booked_seat: booked_seat.to_string(),
+                bus_status: booked_seat.to_string(),
             };
             self.buz.push(buz1);
             env::log_str("Bus added");
@@ -58,8 +58,12 @@ impl Contract {
         self.buz.pop();
         env::log_str("Bus deleted");
     }
+    pub fn booking(&mut self){
+        
+    }
 
 }
+
 
 /*
  * the rest of this file sets up unit tests
