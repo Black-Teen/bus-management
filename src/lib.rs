@@ -1,8 +1,8 @@
+use std::collections::HashMap;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::near_bindgen;
 use near_sdk::serde::*;
 use near_sdk::env;
-
 
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
@@ -33,6 +33,7 @@ impl Contract {
             buz
         }
     }
+
     pub fn bus_count(&mut self) -> usize{
         self.buz.len()
     }
@@ -45,11 +46,17 @@ impl Contract {
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
                 bus_capacity: bus_capacity,
-                all_seats: all_seats,
+                all_seats: all_seats.clone(),
                 bus_status: booked_seat.to_string(),
             };
+            let total_seats = buz1.all_seats.clone();
             self.buz.push(buz1);
             env::log_str("Bus added");
+            let seat_status = "Active".to_string();
+            let mut booking_hashmap : HashMap<i8, &str> = HashMap::new();
+            for seat in total_seats{
+                booking_hashmap.insert(seat, &seat_status);
+            }
         }
 
     pub fn show_bus(&mut self) -> &Vec<Buses>{
@@ -59,7 +66,11 @@ impl Contract {
         self.buz.pop();
         env::log_str("Bus deleted");
     }
-    
+    pub fn booking_seats(){
+        let mut z = Contract::new_bus();
+        z.add_bus("KBA 0125A".to_string(), "Maseno".to_string(), 62, (1..62).collect::<Vec<i8>>(), "Active".to_string());
+        
+    }
 }
 
 
