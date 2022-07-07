@@ -66,11 +66,7 @@ impl Contract {
         self.buz.pop();
         env::log_str("Bus deleted");
     }
-    pub fn booking_seats(){
-        let mut z = Contract::new_bus();
-        z.add_bus("KBA 0125A".to_string(), "Maseno".to_string(), 62, (1..62).collect::<Vec<i8>>(), "Active".to_string());
-        
-    }
+    
 }
 
 
