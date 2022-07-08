@@ -22,9 +22,6 @@ pub struct Contract{
     buz : Vec<Buses>,
 }
 
-#[near_bindgen]
-
-// #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
     // function to add a new vector bus.
