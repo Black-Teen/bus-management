@@ -91,6 +91,7 @@ mod tests {
 
     // TESTS HERE
     #[test]
+    // test checking the existence of data in the vector
     fn bus_existence(){
         let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
         let _context = get_context(user.clone());
@@ -100,6 +101,7 @@ mod tests {
         assert_eq!(counting, 1);
     }
     #[test]
+    //test adding data to vector.
     fn add_bus(){
         let user = AccountId::new_unchecked("mashkariz_charles.testnet".to_string());
         let _context = get_context(user.clone());
