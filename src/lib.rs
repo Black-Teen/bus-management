@@ -46,7 +46,7 @@ impl Contract {
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
                 bus_capacity: bus_capacity,
-                all_seats: all_seats.clone(),
+                all_seats: all_seats.into_iter().collect::<Vec<i8>>(),
                 bus_status: bus_status.to_string(),
             };
             self.buz.push(buz1);
