@@ -26,17 +26,19 @@ pub struct Contract{
 // #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
-    // function to add a new bus.
+    // function to add a new vector bus.
     pub fn new_bus() -> Self{
         let buz = Vec::new();
         Contract{
             buz
         }
     }
-
+    // function to count the vector of Buses
     pub fn bus_count(&mut self) -> usize{
         self.buz.len()
     }
+
+    // adding information held at the Buses Struct
     pub fn add_bus(&mut self, registration_no: String,
         route: String,
         bus_capacity: i8,
@@ -53,9 +55,11 @@ impl Contract {
             env::log_str("Bus added");
     }
 
+    // display data from the vector Buses
     pub fn show_bus(&mut self) -> &Vec<Buses>{
         &self.buz
     }
+    // delete a bus from the vector
     pub fn delete_bus(&mut self){
         self.buz.pop();
         env::log_str("Bus deleted");
