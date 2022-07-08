@@ -16,12 +16,13 @@ pub struct Buses {
 }
 
 #[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize)]
+#[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
+#[serde(crate="near_sdk::serde")]
 pub struct Contract{
     // set up contract struct
     buz : Vec<Buses>,
 }
-
+#[near_bindgen]
 impl Contract {
     // ADD CONTRACT METHODS HERE
     // function to add a new vector bus.
