@@ -7,7 +7,7 @@ use near_sdk::env;
 #[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
 #[serde(crate="near_sdk::serde")]
 pub struct Buses {
-    // SETUP CONTRACT STATE
+    // Struct to hold info on buses.
     registration_no : String,
     route : String,
     bus_capacity : i8,
@@ -18,6 +18,7 @@ pub struct Buses {
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Contract{
+    // set up contract struct
     buz : Vec<Buses>,
 }
 
@@ -25,6 +26,7 @@ pub struct Contract{
 // #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
+    // function to add a new bus.
     pub fn new_bus() -> Self{
         let buz = Vec::new();
         Contract{
