@@ -1,11 +1,9 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::near_bindgen;
-use near_sdk::serde::*;
 use near_sdk::env;
 
 #[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize, Debug, Serialize, Deserialize)]
-#[serde(crate="near_sdk::serde")]
+#[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Buses {
     // Struct to hold info on buses.
     registration_no : String,
@@ -23,6 +21,7 @@ pub struct Contract{
 }
 
 #[near_bindgen]
+
 // #[derive(ToPrimitive)]
 impl Contract {
     // ADD CONTRACT METHODS HERE
