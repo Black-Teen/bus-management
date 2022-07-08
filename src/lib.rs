@@ -41,13 +41,13 @@ impl Contract {
         route: String,
         bus_capacity: i8,
         all_seats: Vec<i8>,
-        booked_seat: String){
+        bus_status: String){
             let buz1 = Buses{
                 registration_no: registration_no.to_string(),
                 route: route.to_string(),
                 bus_capacity: bus_capacity,
                 all_seats: all_seats.clone(),
-                bus_status: booked_seat.to_string(),
+                bus_status: bus_status.to_string(),
             };
             self.buz.push(buz1);
             env::log_str("Bus added");
