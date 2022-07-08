@@ -20,7 +20,7 @@ pub struct Contract{
     buz : Vec<Buses>,
 }
 
-#[near_bindgen]
+#[near_bindgen(BorshSerialize, BorshDeserialize)]
 
 // #[derive(ToPrimitive)]
 impl Contract {
