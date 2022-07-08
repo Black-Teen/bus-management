@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::near_bindgen;
 use near_sdk::serde::*;
@@ -15,7 +14,6 @@ pub struct Buses {
     all_seats : Vec<i8>,
     bus_status: String,
 }
-
 
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
@@ -49,15 +47,9 @@ impl Contract {
                 all_seats: all_seats.clone(),
                 bus_status: booked_seat.to_string(),
             };
-            let total_seats = buz1.all_seats.clone();
             self.buz.push(buz1);
             env::log_str("Bus added");
-            let seat_status = "Active".to_string();
-            let mut booking_hashmap : HashMap<i8, &str> = HashMap::new();
-            for seat in total_seats{
-                booking_hashmap.insert(seat, &seat_status);
-            }
-        }
+    }
 
     pub fn show_bus(&mut self) -> &Vec<Buses>{
         &self.buz
@@ -68,7 +60,6 @@ impl Contract {
     }
     
 }
-
 
 /*
  * the rest of this file sets up unit tests
